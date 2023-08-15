@@ -13,6 +13,6 @@ import { UsersMiddleware } from './middlewares/new-users.middleware';
 })
 export class NewUsersModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {
-    consumer.apply(UsersMiddleware).forRoutes('api/v1');
+    consumer.apply(UsersMiddleware).forRoutes('/');
   }
 }

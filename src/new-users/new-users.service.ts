@@ -3,6 +3,7 @@ import { CreateNewUserDto } from './dto/create-new-user.dto';
 import { UpdateNewUserDto } from './dto/update-new-user.dto';
 import { UserRepository } from './repo/user.repository';
 import { NewUser } from './entities/new-user.entity';
+import { error } from 'console';
 
 @Injectable()
 export class NewUsersService {
@@ -17,8 +18,8 @@ export class NewUsersService {
     const existingEmail = await this.userRepository.find({
       where: { email: createNewUserDto.email },
     });
-    if (existingEmail.length > 0) return 'User Already Exists';
-    return this.userRepository.save(user);
+    if (existingEmail.length > 0) return Promise.reject('User Already Exists');
+    return Promise.resolve(this.userRepository.save(user));
   }
 
   findAll() {
